@@ -68,7 +68,7 @@ def get_IEMOCAP_loaders(batch_size=32, valid=0.1, num_workers=0, pin_memory=Fals
     return train_loader, valid_loader, test_loader
 
 
-def train_or_eval_model(model, loss_function, kl_loss, dataloader, epoch, optimizer=None, train=False):
+def train_or_eval_model(model, loss_function, kl_loss, dataloader, epoch, optimizer=None, train=False, gamma_1=1, gamma_2=1, gamma_3=1):
     losses, preds, labels, masks = [], [], [], []
 
     assert not train or optimizer!=None
@@ -99,9 +99,9 @@ def train_or_eval_model(model, loss_function, kl_loss, dataloader, epoch, optimi
         kl_lp_3 = kl_log_prob3.view(-1, kl_log_prob3.size()[2])
         kl_p_all = kl_all_prob.view(-1, kl_all_prob.size()[2])
         
-        loss = loss_function(lp_all, labels_, umask) + loss_function(lp_1, labels_, umask) + \
-               loss_function(lp_2, labels_, umask) + loss_function(lp_3, labels_, umask) + \
-               kl_loss(kl_lp_1, kl_p_all, umask) + kl_loss(kl_lp_2, kl_p_all, umask) + kl_loss(kl_lp_3, kl_p_all, umask)
+        loss = gamma_1 * loss_function(lp_all, labels_, umask) + \
+                gamma_2 * (loss_function(lp_1, labels_, umask) + loss_function(lp_2, labels_, umask) + loss_function(lp_3, labels_, umask)) + \
+               gamma_3 * (kl_loss(kl_lp_1, kl_p_all, umask) + kl_loss(kl_lp_2, kl_p_all, umask) + kl_loss(kl_lp_3, kl_p_all, umask))
 
         lp_ = all_prob.view(-1, all_prob.size()[2])
 
