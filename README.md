@@ -33,14 +33,15 @@ bash exec_meld.sh
 ## Citation
 If you find our work useful for your research, please kindly cite our paper. Thanks!
 ```
-@article{ma2023sdt,
+@article{ma2024sdt,
   author={Ma, Hui and Wang, Jian and Lin, Hongfei and Zhang, Bo and Zhang, Yijia and Xu, Bo},
   journal={IEEE Transactions on Multimedia}, 
   title={A Transformer-Based Model With Self-Distillation for Multimodal Emotion Recognition in Conversations}, 
-  year={2023},
-  volume={},
+  year={2024},
+  volume={26},
   number={},
-  pages={1-13},
+  pages={776-788},
   keywords={Emotion recognition;Transformers;Oral communication;Context modeling;Task analysis;Visualization;Logic gates;Multimodal emotion recognition in conversations;intra- and inter-modal interactions;multimodal fusion;modal representation},
   doi={10.1109/TMM.2023.3271019}}
+
 ```
